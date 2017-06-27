@@ -33,7 +33,11 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
+<<<<<<< HEAD
 	
+=======
+		System.out.println("고칠거라고");
+>>>>>>> branch 'master' of https://github.com/kimc1578/demo.git
 		
 		
 		int i = 10;
