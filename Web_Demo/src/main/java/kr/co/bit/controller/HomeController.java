@@ -36,8 +36,6 @@ public class HomeController {
 		System.out.println("혀노");
 
 		
-		int i = 10;
-		
 		return "home";
 	}
 	
