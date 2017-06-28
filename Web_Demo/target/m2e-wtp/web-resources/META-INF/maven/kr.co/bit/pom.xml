@@ -22,6 +22,18 @@
 	</repositories>
 
 	<dependencies>
+		<!-- spring test -->
+		
+<dependency>
+
+        <groupId>org.springframework</groupId>
+
+        <artifactId>spring-test</artifactId>
+
+        <version>4.3.8.RELEASE</version>
+
+    </dependency>
+		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
