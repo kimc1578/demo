@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+<beans xsi:schemaLocation="http://www.springframework.org/schema/jdbc 
+http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd 
+http://mybatis.org/schema/mybatis-spring 
+http://mybatis.org/schema/mybatis-spring-1.2.xsd 
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-4.3.xsd" 
+xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring" 
+xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:aop="http://www.springframework.org/schema/aop" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://www.springframework.org/schema/beans">
+
+<!-- repository 라이브러리 먼저 추가를 해준다. -->
+
+
+
+<bean class="org.springframework.jdbc.datasource.SimpleDriverDataSource" id="dataSource">
+
+<!-- 값 주입 -->
+
+
+<property value="oracle.jdbc.driver.OracleDriver" name="driverClass"/>
+
+<property value="jdbc:oracle:thin:@localhost:1521:orcl" name="url"/>
+
+<property value="shh" name="username"/>
+
+<property value="shh" name="password"/>
+
+</bean>
+
+
+<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+
+<property name="dataSource" ref="dataSource"/>
+
+<property value="classpath:/mybatis-config.xml" name="configLocation"/>
+
+</bean>
+
 </beans>
