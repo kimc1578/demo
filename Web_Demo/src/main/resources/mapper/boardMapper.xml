@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="kr.co.pjb.mapper.BoardMapper">
+  
+  	<!-- 게시글 작성 -->
+ 	<insert id="boardWrite">
+ 		<![CDATA[
+ 			insert into tb_board_demo(bidx, title, contents, userid, 
+ 					writedate, moddate, hitcnt, board_kind, file_bidx) 
+  					values(board_seq.NEXTVAL, #{title}, #{contents}, 
+  						#{userid}, sysdate, sysdate, 0, #{board_kind}, null)
+ 		]]>
+ 	</insert>
+ 	
+ 	<!-- 게시글 리스트 -->
+ 	<select id="boardList" resultType="kr.co.pjb.board.vo.BoardListVO">
+ 		select bidx, title, userid, writedate, moddate, hitcnt, board_name from tb_board_demo board, 
+ 			 tb_board_kind_demo kind where board.board_kind = kind.board_kind order by bidx desc
+ 	</select>
+ 	
+ 	<!-- 게시글종류에 따른 리스트 -->
+  	<select id="boardListSel" resultType="kr.co.pjb.board.vo.BoardListVO">
+  		select bidx, title, userid, writedate, moddate, hitcnt, 
+  				board_name from tb_board_demo board, tb_board_kind_demo kind 
+  				where board.board_kind = kind.board_kind and 
+  				board.board_kind = #{board_kind} order by bidx desc
+  	</select>
+  
+  	<!-- 파일 없는 게시글 불러오기 -->
+  	<select id="boardContentsNoFile" resultType="kr.co.pjb.board.vo.BoardContentsVO">
+  		select * from tb_board_demo where bidx = #{bidx}
+  	</select>
+
+  	
+  	<!-- 게시글 조회수 올리기 -->
+  	<update id="boardUpHitcnt">
+  		<![CDATA[
+  			update tb_board_demo set hitcnt = hitcnt+1 where bidx = #{bidx}
+  		]]>
+  	</update>
+  	
+  	<!-- 게시글 삭제 -->
+  	<delete id="boardDelete">
+  		delete from tb_board_demo where bidx = #{bidx}
+  	</delete>
+  	
+  	<!-- 게시글 수정 -->
+  	<update id="boardUpdate">
+  		update tb_board_demo set title = #{title}, contents = #{contents} where bidx = #{bidx}
+  	</update>
+  	
+  	<!-- 보드종류 가져오기 -->
+  	<select id="boardKindGet" resultType="kr.co.pjb.board.vo.BoardKindVO">
+  		select * from tb_board_kind_demo where board_kind = #{board_kind}
+  	</select>
+ 
+  	
+  </mapper>

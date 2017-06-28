@@ -39,12 +39,14 @@ xmlns="http://www.springframework.org/schema/beans">
 <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
 
 <property name="dataSource" ref="dataSource"/>
+<property name="mapperLocations" value="classpath:/mapper/**/*Mapper.xml" />
 
 </bean> 
 
 <bean class="org.mybatis.spring.SqlSessionTemplate" name="sqlSession" destroy-method="clearCache">
 
 <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+
 
 </bean>
 
