@@ -20,14 +20,14 @@ xmlns="http://www.springframework.org/schema/beans">
 
 
 
-<bean class="org.springframework.jdbc.datasource.SimpleDriverDataSource" id="dataSource">
+ <bean class="org.springframework.jdbc.datasource.SimpleDriverDataSource" id="dataSource">
 
-<!-- 값 주입 -->
+
 
 
 <property value="oracle.jdbc.driver.OracleDriver" name="driverClass"/>
 
-<property value="jdbc:oracle:thin:@localhost:1521:orcl" name="url"/>
+<property value="jdbc:oracle:thin:@192.168.1.5:1521:xe" name="url"/>
 
 <property value="shh" name="username"/>
 
@@ -40,7 +40,11 @@ xmlns="http://www.springframework.org/schema/beans">
 
 <property name="dataSource" ref="dataSource"/>
 
-<property value="classpath:/mybatis-config.xml" name="configLocation"/>
+</bean> 
+
+<bean class="org.mybatis.spring.SqlSessionTemplate" name="sqlSession" destroy-method="clearCache">
+
+<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 
 </bean>
 
